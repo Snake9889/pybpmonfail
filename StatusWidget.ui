@@ -72,7 +72,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="period_spinBox"/>
+      <widget class="QSpinBox" name="periodSBox">
+       <property name="maximum">
+        <number>300</number>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QCheckBox" name="sound_checkBox">

@@ -1,8 +1,8 @@
 #
 #
-from PyQt5.QtCore import pyqtSignal, QObject
+from PyQt5.QtCore import QObject
 import numpy as np
-import pycx4.qcda as cda
+#import pycx4.qcda as cda
 from BPM_template import BPMTemplate
 
 
@@ -20,6 +20,8 @@ class BPMData(BPMTemplate):
         elif bpm_name == "bpm03": bpm_channel = 6
         elif bpm_name == "bpm04": bpm_channel = 7
         else:                     bpm_channel = 4
+        
+        self.bpm_name = bpm_name
 
         bpm_data_name = '{0}{1}{2}'.format(self.bpm_channel_template, bpm_channel, "@s")
         bpm_numpts_name = '{0}{1}{2}'.format(self.bpm_channel_template, bpm_channel, "@p10")
@@ -44,7 +46,6 @@ class BPMData(BPMTemplate):
         """   """
         self.num_pts = chan.val
         print(chan.val)
-        #self.num_pts = 8186
         self.data_len = self.num_pts
 
         tmp = np.reshape(self.data, (4, self.num_pts))

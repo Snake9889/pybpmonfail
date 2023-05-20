@@ -1,5 +1,5 @@
 
-from PyQt5.QtCore import pyqtSignal, QObject, QTimer, QSettings
+from PyQt5.QtCore import QTimer
 import numpy as np
 import random
 from BPM_template import BPMTemplate
@@ -34,11 +34,10 @@ class BPMData(BPMTemplate):
 
         self.dataT = np.arange(0, self.data_len, dtype=float)
 
-        self.def_time = 5*10**3
+        self.def_time = 10*10**3
         self.timer = QTimer()
         self.timer.timeout.connect(self.on_timer_update)
         self.timer.start(self.def_time)
-        # self.particles = "e+"
         self.bpm_name = bpm_name
 
 
@@ -88,18 +87,3 @@ class BPMData(BPMTemplate):
         """   """
         super().force_data_ready(signature)
 
-    # def read_settings(self):
-        # """   """
-        # settings = QSettings()
-        # settings.beginGroup(self.bpm)
-        # self.particles = settings.value("particles", "e-")
-        # settings.endGroup()
-
-    # def save_settings(self):
-        # """   """
-        # settings = QSettings()
-        # settings.beginGroup(self.bpm)
-        # settings.setValue("particles", self.particles)
-        # settings.endGroup()
-        # print("Saved!!!!!")
-        # settings.sync()

@@ -6,9 +6,11 @@ import signal
 from mainwindow import *
 from settingscontrol import SettingsControl
 from command_parser import TerminalParser
+from datasources_all import BPMDataAll
+from watcher import *
 
-pg.setConfigOption('background', 'w')
-pg.setConfigOption('foreground', 'k')
+# pg.setConfigOption('background', 'w')
+# pg.setConfigOption('foreground', 'k')
 
 # Allow CTRL+C and/or SIGTERM to kill us (PyQt blocks it otherwise)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
@@ -28,8 +30,7 @@ if __name__ == "__main__":
     argument_parser = TerminalParser()
     bpm_name_parsed = argument_parser.bpm_name_parsed
     sound_status = argument_parser.sound_status_parsed
-
-    data_source = None
+    mw_status = argument_parser.mw_status_parsed
 
     if bpm_name_parsed == "model":
         from datasources_all import BPMDataAll
@@ -49,22 +50,82 @@ if __name__ == "__main__":
         exit()
 
     settingsControl = SettingsControl()
+    
+    watcher_1 = Watcher()
+    watcher_2 = Watcher()
+    watcher_3 = Watcher()
+    watcher_4 = Watcher()
+    
+    watcher_dict = {'bpm01': watcher_1,
+                    'bpm02': watcher_2,
+                    'bpm03': watcher_3,
+                    'bpm04': watcher_4}
+    
+    def on_data_recv(data_source):
+        """   """
+        if data_source.bpm_name in ('model01', 'bpm01'):
+            watcher_1.on_data_ready(data_source)
+        elif data_source.bpm_name in ('model02', 'bpm02'):
+            watcher_2.on_data_ready(data_source)
+        elif data_source.bpm_name in ('model03', 'bpm03'):
+            watcher_3.on_data_ready(data_source)
+        elif data_source.bpm_name in ('model04', 'bpm04'):
+            watcher_4.on_data_ready(data_source)
+        else: pass
+    
+    def period_connector(period_info):
+        """   """
+        period = period_info[0]
+        bpm_name = period_info[1]
+        if bpm_name in ('model_1', 'bpm01'):
+            watcher_1.set_time_length(period)
+        elif bpm_name in ('model_2', 'bpm02'):
+            watcher_2.set_time_length(period)
+        elif bpm_name in ('model_3', 'bpm03'):
+            watcher_3.set_time_length(period)
+        elif bpm_name in ('model_4', 'bpm04'):
+            watcher_4.set_time_length(period)
+        else: pass
+    
+    def sound_connector(sound_info):
+        """   """
+        sound = sound_info[0]
+        bpm_name = sound_info[1]
+        if bpm_name in ('model_1', 'bpm01'):
+            watcher_1.set_sound_enabled(sound)
+        elif bpm_name in ('model_2', 'bpm02'):
+            watcher_2.set_sound_enabled(sound)
+        elif bpm_name in ('model_3', 'bpm03'):
+            watcher_3.set_sound_enabled(sound)
+        elif bpm_name in ('model_4', 'bpm04'):
+            watcher_4.set_sound_enabled(sound)
+        else: pass
 
-    # mw = MainWindow(data_source, settingsControl, bpm_name_parsed)
-    # mw.setWindowTitle('pybpmonfail ({})'.format('all'))
+    if mw_status == 'on':
+        mw = MainWindow(settingsControl, watcher_1, watcher_2, watcher_3, watcher_4)
+        mw.setWindowTitle('pybpmonfail ({})'.format('all'))
 
-    # icon_path = os.path.dirname(os.path.abspath(__file__))
-    # mw_icon = QIcon()
-    # mw_icon.addFile(os.path.join(icon_path, 'etc/icons/app_icon.png'), QSize(32, 32))
-    # mw.setWindowIcon(mw_icon)
+        icon_path = os.path.dirname(os.path.abspath(__file__))
+        mw_icon = QIcon()
+        mw_icon.addFile(os.path.join(icon_path, 'etc/icons/app_icon.png'), QSize(32, 32))
+        mw.setWindowIcon(mw_icon)
+        
+        settingsControl.add_object(mw)
+        watcher_1.alarm_status.connect(mw.on_alarm_status)
+        watcher_2.alarm_status.connect(mw.on_alarm_status)
+        watcher_3.alarm_status.connect(mw.on_alarm_status)
+        watcher_4.alarm_status.connect(mw.on_alarm_status)
+        
+        mw.period_changed.connect(period_connector)
+        mw.sound_changed.connect(sound_connector)
+        
+        mw.show()
+    else: pass
 
-    data_source.data_ready.connect(mw.on_current_choice)
-    data_source.data_ready.connect(data_proc.on_data_recv)
+    data_source.data_ready.connect(on_data_recv)
+    
+    
 
-    settingsControl.add_object(mw)
     settingsControl.read_settings()
 
-    data_proc.data_processed.connect(mw.on_widgets_choice)
-
-    mw.show()
     sys.exit(app.exec_())

@@ -1,7 +1,8 @@
 
-from PyQt5.QtCore import pyqtSignal, QObject, QTimer, QSettings
+from PyQt5.QtCore import pyqtSignal, QObject, QTimer
 import os
 from datetime import datetime
+import playsound
 
 class Watcher(QObject):
     """   """
@@ -9,7 +10,7 @@ class Watcher(QObject):
     alarm_status = pyqtSignal(object)
 
     """Default time for timer in ms"""
-    DEFAULT_TIME = 30*1000
+    DEFAULT_TIME = 5*1000
 
     def __init__(self, bpm_name='',time_lenght=DEFAULT_TIME, sound_status=True, parent=None):
         super().__init__(parent)
@@ -65,19 +66,21 @@ class Watcher(QObject):
         self.istart = BPM.istart
         now = datetime.now()
         self.last_time = now.strftime("%H:%M:%S")
+        print(self.enumerator, self.istart, self.bpm_name)
 
     def on_sound_played(self):
         """   """
         if self.sound_status == True:
             sound_path = None
-            sound_path = os.path.join(self.sound_path, self.music_lin[self.bpm_name])
+            sound_path = os.path.join(self.sound_path, self.music_win[self.bpm_name])
             print(sound_path)
             playsound(sound_path)
         else:
             pass
 
-    def set_sound_enabled(self, sound_enabled : bool):
+    def set_sound_enabled(self, sound_enabled: bool):
         """   """
+        print(sound_enabled)
         self.sound_status = sound_enabled
 
     def get_sound_enabled(self):
@@ -91,3 +94,7 @@ class Watcher(QObject):
     def get_start_type(self):
         """   """
         return(self.istart)
+    
+    def set_time_length(self, time_lenght):
+        """   """
+        self.time_lenght = time_lenght

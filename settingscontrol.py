@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from PyQt5.QtCore import pyqtSignal, QObject
-from PyQt5.QtCore import QSize, QCoreApplication
+from PyQt5.QtCore import QCoreApplication
 
 
 class SettingsControl(QObject):
