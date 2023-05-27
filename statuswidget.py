@@ -48,7 +48,7 @@ class StatusWidget(QWidget):
     def save_settings(self):
         """   """
         settings = QSettings()
-        settings.beginGroup(self.bpm)
+        settings.beginGroup(self.bpm_name)
         settings.setValue("period", self.period)
         settings.setValue("sound", self.sound)
         settings.endGroup()
@@ -58,16 +58,17 @@ class StatusWidget(QWidget):
     def read_settings(self):
         """   """
         settings = QSettings()
-        settings.beginGroup(self.bpm)
-        self.rboard = settings.value("rboard", 30, type=float)
-        self.scale = settings.value("scale", "on")
+        settings.beginGroup(self.bpm_name)
+        self.period = settings.value("periodd", 30, type=float)
+        self.sound = settings.value("sound", "on")
         settings.endGroup()
 
 
         if self.sound == "on":
-            self.log_mod.setCheckState(Qt.Checked)
-        elif self.scale == "off":
-            self.log_mod.setCheckState(Qt.Unhecked)
-        self.sound_changed_str.emit(self)
+            self.sound_checkBox.setCheckState(Qt.Checked)
+        elif self.sound == "off":
+            self.sound_checkBox.setCheckState(Qt.Unchecked)
+        self.sound_changed.emit(self)
 
         self.periodSBox.setValue(self.period)
+        self.period_changed.emit(self)

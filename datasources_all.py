@@ -1,7 +1,7 @@
 #
 #
 import numpy as np
-#import pycx4.qcda as cda
+import pycx4.qcda as cda
 from BPM_template import BPMTemplate
 from datasources_bpm import BPMData
 import datasources
@@ -19,7 +19,7 @@ class BPMDataAll(BPMTemplate):
     istart_work = (0, 0, 0, 0)
 
     def __init__(self, bpm_name='', parent=None):
-        super().__init__("bpm_all", parent)
+        super().__init__(bpm_name, parent)
 
         self.data_bpm = None
         self.istart = None
@@ -48,7 +48,6 @@ class BPMDataAll(BPMTemplate):
 
     def on_data_ready(self, BPM):
         """   """
-        print(BPM.bpm_name)
         self.bpm_name = BPM.bpm_name
         self.istart = BPM.istart
         self.reshaping_data(BPM)

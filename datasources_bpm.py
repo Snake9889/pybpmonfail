@@ -2,7 +2,7 @@
 #
 from PyQt5.QtCore import QObject
 import numpy as np
-#import pycx4.qcda as cda
+import pycx4.qcda as cda
 from BPM_template import BPMTemplate
 
 
@@ -20,15 +20,12 @@ class BPMData(BPMTemplate):
         elif bpm_name == "bpm03": bpm_channel = 6
         elif bpm_name == "bpm04": bpm_channel = 7
         else:                     bpm_channel = 4
-        
+
         self.bpm_name = bpm_name
 
         bpm_data_name = '{0}{1}{2}'.format(self.bpm_channel_template, bpm_channel, "@s")
         bpm_numpts_name = '{0}{1}{2}'.format(self.bpm_channel_template, bpm_channel, "@p10")
         bpm_istart_name = '{0}{1}{2}'.format(self.bpm_channel_template, bpm_channel, "@p2") #1 - run mode, 0 - kick mode
-
-        print(bpm_data_name)
-        print(bpm_numpts_name)
 
         self.bpmChan = cda.VChan(bpm_data_name, max_nelems=8 * 1024 * 4, dtype=cda.DTYPE_INT32)
         self.bpmChan_numpts = cda.IChan(bpm_numpts_name)
@@ -45,7 +42,6 @@ class BPMData(BPMTemplate):
     def _on_numpts_update(self, chan):
         """   """
         self.num_pts = chan.val
-        print(chan.val)
         self.data_len = self.num_pts
 
         tmp = np.reshape(self.data, (4, self.num_pts))
@@ -60,6 +56,3 @@ class BPMData(BPMTemplate):
     def _on_istart_update(self, chan):
         """   """
         self.istart = chan.val
-        print(self.bpm_name, ":", self.istart)
-
-
