@@ -31,6 +31,7 @@ class BPMDataAll(BPMTemplate):
             self.BPM3 = BPMData("bpm03")
             self.BPM4 = BPMData("bpm04")
         elif bpm_name == 'model':
+            print('model')
             self.BPM1 = datasources.BPMData("model01")
             self.BPM2 = datasources.BPMData("model02")
             self.BPM3 = datasources.BPMData("model03")

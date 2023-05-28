@@ -59,7 +59,7 @@ class StatusWidget(QWidget):
         """   """
         settings = QSettings()
         settings.beginGroup(self.bpm_name)
-        self.period = settings.value("periodd", 30, type=float)
+        self.period = settings.value("period", 30, type=float)
         self.sound = settings.value("sound", "on")
         settings.endGroup()
 

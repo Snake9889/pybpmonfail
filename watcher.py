@@ -40,16 +40,17 @@ class Watcher(QObject):
                           "bpm02": 'etc/sound/BPM02_stopped.mp3',
                           "bpm03": 'etc/sound/BPM03_stopped.mp3',
                           "bpm04": 'etc/sound/BPM04_stopped.mp3',
-                          "model01": 'etc/sound/Model.mp4',
-                          "model02": 'etc/sound/Model.mp4',
-                          "model03": 'etc/sound/Model.mp4',
-                          "model04": 'etc/sound/Model.mp4'}
+                          "model01": 'etc/sound/Model_stopped.mp3',
+                          "model02": 'etc/sound/Model_stopped.mp3',
+                          "model03": 'etc/sound/Model_stopped.mp3',
+                          "model04": 'etc/sound/Model_stopped.mp3'}
 
     def on_timer_update(self):
         """   """
         if self.istart != 1:
             self.alarm = 0
-            self.sound_status = False
+            if self.istart == 0:
+                self.sound_status = False
             self.alarm_status.emit(self)
         else:
             if self.enumerator != 0:
@@ -96,7 +97,6 @@ class Watcher(QObject):
 
     def get_start_type(self):
         """   """
-        print(self.istart)
         return(self.istart)
 
     def get_bpm_name(self):
