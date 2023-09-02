@@ -3,11 +3,11 @@
 from PyQt5.QtCore import QCoreApplication, QSettings, QSize
 from PyQt5.QtGui import QIcon
 import signal
-from mainwindow import *
-from settingscontrol import SettingsControl
-from command_parser import TerminalParser
-from datasources_all import BPMDataAll
-from watcher import *
+from pybpmonfail.Modules.MainWindow.mainwindow import *
+from pybpmonfail.Modules.settingscontrol import SettingsControl
+from pybpmonfail.Modules.command_parser import TerminalParser
+from pybpmonfail.Modules.DataSources.datasources_all import BPMDataAll
+from pybpmonfail.Modules.watcher import *
 
 # pg.setConfigOption('background', 'w')
 # pg.setConfigOption('foreground', 'k')
@@ -33,7 +33,7 @@ if __name__ == "__main__":
     mw_status = argument_parser.mw_status_parsed
 
     if bpm_name_parsed == "model":
-        from datasources_all import BPMDataAll
+        #from pybpmonfail.Modules.DataSources.datasources_all import BPMDataAll
         data_source = BPMDataAll(bpm_name=bpm_name_parsed)
         watcher_1 = Watcher("model01")
         watcher_2 = Watcher("model02")
@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
 
     elif bpm_name_parsed == "bpm":
-        from datasources_all import BPMDataAll
+        #from pybpmonfail.Modules.DataSources.datasources_all import BPMDataAll
         data_source = BPMDataAll(bpm_name=bpm_name_parsed)
         watcher_1 = Watcher("bpm01")
         watcher_2 = Watcher("bpm02")
@@ -50,7 +50,7 @@ if __name__ == "__main__":
         watcher_4 = Watcher("bpm04")
 
     else:
-        from datasources_all import BPMDataAll
+        #from pybpmonfail.Modules.DataSources.datasources_all import BPMDataAll
         data_source = BPMDataAll(bpm_name="model")
         watcher_1 = Watcher("model01")
         watcher_2 = Watcher("model02")

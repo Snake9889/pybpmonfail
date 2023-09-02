@@ -4,8 +4,7 @@ import os.path
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtCore import pyqtSignal, QSettings, QSize, QPoint
 from PyQt5 import uic
-from helpwidget import HelpWidget
-
+from pybpmonfail.Modules.MainWindow.helpwidget import HelpWidget
 
 
 class MainWindow(QMainWindow):

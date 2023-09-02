@@ -2,9 +2,9 @@
 #
 import numpy as np
 import pycx4.qcda as cda
-from BPM_template import BPMTemplate
-from datasources_bpm import BPMData
-import datasources
+from pybpmonfail.Modules.DataSources.BPM_template import BPMTemplate
+import pybpmonfail.Modules.DataSources.datasources_bpm as ds_bpm
+import pybpmonfail.Modules.DataSources.datasources as ds_model
 
 class BPMDataAll(BPMTemplate):
     """   """
@@ -26,21 +26,21 @@ class BPMDataAll(BPMTemplate):
         self.bpm_name_local = None
 
         if bpm_name == 'bpm':
-            self.BPM1 = BPMData("bpm01")
-            self.BPM2 = BPMData("bpm02")
-            self.BPM3 = BPMData("bpm03")
-            self.BPM4 = BPMData("bpm04")
+            self.BPM1 = ds_bpm.BPMData("bpm01")
+            self.BPM2 = ds_bpm.BPMData("bpm02")
+            self.BPM3 = ds_bpm.BPMData("bpm03")
+            self.BPM4 = ds_bpm.BPMData("bpm04")
         elif bpm_name == 'model':
             print('model')
-            self.BPM1 = datasources.BPMData("model01")
-            self.BPM2 = datasources.BPMData("model02")
-            self.BPM3 = datasources.BPMData("model03")
-            self.BPM4 = datasources.BPMData("model04")
+            self.BPM1 = ds_model.BPMData("model01")
+            self.BPM2 = ds_model.BPMData("model02")
+            self.BPM3 = ds_model.BPMData("model03")
+            self.BPM4 = ds_model.BPMData("model04")
         else:
-            self.BPM1 = datasources.BPMData("model01")
-            self.BPM2 = datasources.BPMData("model02")
-            self.BPM3 = datasources.BPMData("model03")
-            self.BPM4 = datasources.BPMData("model04")
+            self.BPM1 = ds_model.BPMData("model01")
+            self.BPM2 = ds_model.BPMData("model02")
+            self.BPM3 = ds_model.BPMData("model03")
+            self.BPM4 = ds_model.BPMData("model04")
 
         self.BPM1.data_ready.connect(self.on_data_ready)
         self.BPM2.data_ready.connect(self.on_data_ready)

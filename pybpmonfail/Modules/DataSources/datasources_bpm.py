@@ -3,7 +3,7 @@
 from PyQt5.QtCore import QObject
 import numpy as np
 import pycx4.qcda as cda
-from BPM_template import BPMTemplate
+from pybpmonfail.Modules.DataSources.BPM_template import BPMTemplate
 
 
 class BPMData(BPMTemplate):
