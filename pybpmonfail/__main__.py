@@ -9,9 +9,6 @@ from pybpmonfail.Modules.command_parser import TerminalParser
 from pybpmonfail.Modules.DataSources.datasources_all import BPMDataAll
 from pybpmonfail.Modules.watcher import *
 
-# pg.setConfigOption('background', 'w')
-# pg.setConfigOption('foreground', 'k')
-
 # Allow CTRL+C and/or SIGTERM to kill us (PyQt blocks it otherwise)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 signal.signal(signal.SIGTERM, signal.SIG_DFL)
