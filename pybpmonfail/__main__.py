@@ -48,7 +48,7 @@ if __name__ == "__main__":
 
     else:
         #from pybpmonfail.Modules.DataSources.datasources_all import BPMDataAll
-        data_source = BPMDataAll(bpm_name="model")
+        data_source = BPMDataAll(bpm_name="bpm")
         watcher_1 = Watcher("model01")
         watcher_2 = Watcher("model02")
         watcher_3 = Watcher("model03")

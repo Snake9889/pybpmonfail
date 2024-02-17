@@ -28,22 +28,22 @@ class Watcher(QObject):
         self.timer.start(self.time_lenght)
 
         self.sound_path = os.path.dirname(os.path.abspath(__file__))
-        self.music_win = {"bpm01": 'etc\sound\BPM01_stopped.mp3',
-                          "bpm02": 'etc\sound\BPM02_stopped.mp3',
-                          "bpm03": 'etc\sound\BPM03_stopped.mp3',
-                          "bpm04": 'etc\sound\BPM04_stopped.mp3',
-                          "model01": 'etc\sound\Model_stopped.mp3',
-                          "model02": 'etc\sound\Model_stopped.mp3',
-                          "model03": 'etc\sound\Model_stopped.mp3',
-                          "model04": 'etc\sound\Model_stopped.mp3'}
-        self.music_lin = {"bpm01": 'etc/sound/BPM01_stopped.mp3',
-                          "bpm02": 'etc/sound/BPM02_stopped.mp3',
-                          "bpm03": 'etc/sound/BPM03_stopped.mp3',
-                          "bpm04": 'etc/sound/BPM04_stopped.mp3',
-                          "model01": 'etc/sound/Model_stopped.mp3',
-                          "model02": 'etc/sound/Model_stopped.mp3',
-                          "model03": 'etc/sound/Model_stopped.mp3',
-                          "model04": 'etc/sound/Model_stopped.mp3'}
+        self.music_win = {"bpm01": 'MainWindow\etc\sound\BPM01_stopped.mp3',
+                          "bpm02": 'MainWindow\etc\sound\BPM02_stopped.mp3',
+                          "bpm03": 'MainWindow\etc\sound\BPM03_stopped.mp3',
+                          "bpm04": 'MainWindow\etc\sound\BPM04_stopped.mp3',
+                          "model01": 'MainWindow\etc\sound\Model_stopped.mp3',
+                          "model02": 'MainWindow\etc\sound\Model_stopped.mp3',
+                          "model03": 'MainWindow\etc\sound\Model_stopped.mp3',
+                          "model04": 'MainWindow\etc\sound\Model_stopped.mp3'}
+        self.music_lin = {"bpm01": 'MainWindow/etc/sound/BPM01_stopped.mp3',
+                          "bpm02": 'MainWindow/etc/sound/BPM02_stopped.mp3',
+                          "bpm03": 'MainWindow/etc/sound/BPM03_stopped.mp3',
+                          "bpm04": 'MainWindow/etc/sound/BPM04_stopped.mp3',
+                          "model01": 'MainWindow/etc/sound/Model_stopped.mp3',
+                          "model02": 'MainWindow/etc/sound/Model_stopped.mp3',
+                          "model03": 'MainWindow/etc/sound/Model_stopped.mp3',
+                          "model04": 'MainWindow/etc/sound/Model_stopped.mp3'}
 
     def on_timer_update(self):
         """   """
