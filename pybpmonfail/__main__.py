@@ -108,7 +108,7 @@ if __name__ == "__main__":
 
     if mw_status == 'on':
         mw = MainWindow(settingsControl, watcher_1, watcher_2, watcher_3, watcher_4)
-        mw.setWindowTitle('PyBPMonFail ({})'.format('all'))
+        mw.setWindowTitle('pybpmonfail ({})'.format('all'))
 
         icon_path = os.path.dirname(os.path.abspath(__file__))
         mw_icon = QIcon()
