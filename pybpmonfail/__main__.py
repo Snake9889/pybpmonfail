@@ -36,15 +36,23 @@ if __name__ == "__main__":
         watcher_2 = Watcher("model02")
         watcher_3 = Watcher("model03")
         watcher_4 = Watcher("model04")
+        watcher_5 = Watcher("model05")
+        watcher_6 = Watcher("model06")
+        watcher_7 = Watcher("model07")
+        watcher_8 = Watcher("model08")
 
 
-    elif bpm_name_parsed == "bpm":
+    elif bpm_name_parsed == "collider":
         #from pybpmonfail.Modules.DataSources.datasources_all import BPMDataAll
         data_source = BPMDataAll(bpm_name=bpm_name_parsed)
         watcher_1 = Watcher("bpm01")
         watcher_2 = Watcher("bpm02")
         watcher_3 = Watcher("bpm03")
         watcher_4 = Watcher("bpm04")
+        watcher_5 = Watcher("ccd01")
+        watcher_6 = Watcher("ccd02")
+        watcher_7 = Watcher("ccd03")
+        watcher_8 = Watcher("ccd04")
 
     else:
         #from pybpmonfail.Modules.DataSources.datasources_all import BPMDataAll
@@ -53,6 +61,10 @@ if __name__ == "__main__":
         watcher_2 = Watcher("model02")
         watcher_3 = Watcher("model03")
         watcher_4 = Watcher("model04")
+        watcher_5 = Watcher("model05")
+        watcher_6 = Watcher("model06")
+        watcher_7 = Watcher("model07")
+        watcher_8 = Watcher("model08")
 
     if data_source is None:
         print("Data source doesn't exists!!! You can't use this program!!!")
@@ -63,7 +75,11 @@ if __name__ == "__main__":
     watcher_dict = {'bpm01': watcher_1,
                     'bpm02': watcher_2,
                     'bpm03': watcher_3,
-                    'bpm04': watcher_4}
+                    'bpm04': watcher_4,
+                    'ccd01': watcher_5,
+                    'ccd02': watcher_6,
+                    'ccd03': watcher_7,
+                    'ccd04': watcher_8}
 
     def on_data_recv(data_source):
         """   """
@@ -75,6 +91,14 @@ if __name__ == "__main__":
             watcher_3.on_data_ready(data_source)
         elif data_source.bpm_name in ('model04', 'bpm04'):
             watcher_4.on_data_ready(data_source)
+        elif data_source.bpm_name in ('model05', 'ccd01'):
+            watcher_5.on_data_ready(data_source)
+        elif data_source.bpm_name in ('model06', 'ccd02'):
+            watcher_6.on_data_ready(data_source)
+        elif data_source.bpm_name in ('model07', 'ccd03'):
+            watcher_7.on_data_ready(data_source)
+        elif data_source.bpm_name in ('model08', 'ccd04'):
+            watcher_8.on_data_ready(data_source)
         else: pass
 
     def period_connector(period_info):
@@ -89,6 +113,14 @@ if __name__ == "__main__":
             watcher_3.set_time_length(period)
         elif bpm_name in ('model04', 'bpm04'):
             watcher_4.set_time_length(period)
+        elif bpm_name in ('model05', 'ccd01'):
+            watcher_5.set_time_length(period)
+        elif bpm_name in ('model06', 'ccd02'):
+            watcher_6.set_time_length(period)
+        elif bpm_name in ('model07', 'ccd03'):
+            watcher_7.set_time_length(period)
+        elif bpm_name in ('model08', 'ccd04'):
+            watcher_8.set_time_length(period)
         else: pass
 
     def sound_connector(sound_info):
@@ -104,10 +136,19 @@ if __name__ == "__main__":
             watcher_3.set_sound_enabled(sound)
         elif bpm_name in ('model04', 'bpm04'):
             watcher_4.set_sound_enabled(sound)
+        elif bpm_name in ('model05', 'ccd01'):
+            watcher_5.set_sound_enabled(sound)
+        elif bpm_name in ('model06', 'ccd02'):
+            watcher_6.set_sound_enabled(sound)
+        elif bpm_name in ('model07', 'ccd03'):
+            watcher_7.set_sound_enabled(sound)
+        elif bpm_name in ('model08', 'ccd04'):
+            watcher_8.set_sound_enabled(sound)
         else: pass
 
     if mw_status == 'on':
-        mw = MainWindow(settingsControl, watcher_1, watcher_2, watcher_3, watcher_4)
+        mw = MainWindow(settingsControl, watcher_1, watcher_2, watcher_3,
+                        watcher_4, watcher_5, watcher_6, watcher_7, watcher_8)
         mw.setWindowTitle('PyBPMonFail ({})'.format('all'))
 
         icon_path = os.path.dirname(os.path.abspath(__file__))
@@ -120,11 +161,19 @@ if __name__ == "__main__":
         settingsControl.add_object(mw.statusWidget_2)
         settingsControl.add_object(mw.statusWidget_3)
         settingsControl.add_object(mw.statusWidget_4)
+        settingsControl.add_object(mw.statusWidget_5)
+        settingsControl.add_object(mw.statusWidget_6)
+        settingsControl.add_object(mw.statusWidget_7)
+        settingsControl.add_object(mw.statusWidget_8)
 
         watcher_1.alarm_status.connect(mw.on_alarm_status)
         watcher_2.alarm_status.connect(mw.on_alarm_status)
         watcher_3.alarm_status.connect(mw.on_alarm_status)
         watcher_4.alarm_status.connect(mw.on_alarm_status)
+        watcher_5.alarm_status.connect(mw.on_alarm_status)
+        watcher_6.alarm_status.connect(mw.on_alarm_status)
+        watcher_7.alarm_status.connect(mw.on_alarm_status)
+        watcher_8.alarm_status.connect(mw.on_alarm_status)
 
         mw.period_changed.connect(period_connector)
         mw.sound_changed.connect(sound_connector)

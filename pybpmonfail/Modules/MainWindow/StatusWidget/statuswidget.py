@@ -59,7 +59,7 @@ class StatusWidget(QWidget):
         """   """
         settings = QSettings()
         settings.beginGroup(self.bpm_name)
-        self.period = settings.value("period", 30, type=float)
+        self.period = settings.value("period", 30, type=int)
         self.sound = settings.value("sound", "on")
         settings.endGroup()
 
@@ -70,5 +70,6 @@ class StatusWidget(QWidget):
             self.sound_checkBox.setCheckState(Qt.Unchecked)
         self.sound_changed.emit(self)
 
+        print(self.period, type(self.period))
         self.periodSBox.setValue(self.period)
         self.period_changed.emit(self)

@@ -2,7 +2,7 @@
 #
 from PyQt5.QtCore import QObject
 import numpy as np
-import pycx4.qcda as cda
+#import pycx4.qcda as cda
 from pybpmonfail.Modules.DataSources.BPM_template import BPMTemplate
 
 
@@ -11,6 +11,7 @@ class BPMData(BPMTemplate):
 
     # bpm_channel_template = "v2cx::hemera:2."
     bpm_channel_template = "v2cx::hemera:4."
+    ccd_channel_template = "None"
 
     def __init__(self, bpm_name='', parent=None):
         super().__init__(bpm_name, parent)

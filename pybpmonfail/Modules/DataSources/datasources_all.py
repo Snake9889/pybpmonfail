@@ -1,7 +1,7 @@
 #
 #
 import numpy as np
-import pycx4.qcda as cda
+#import pycx4.qcda as cda
 from pybpmonfail.Modules.DataSources.BPM_template import BPMTemplate
 import pybpmonfail.Modules.DataSources.datasources_bpm as ds_bpm
 import pybpmonfail.Modules.DataSources.datasources as ds_model
@@ -30,22 +30,38 @@ class BPMDataAll(BPMTemplate):
             self.BPM2 = ds_bpm.BPMData("bpm02")
             self.BPM3 = ds_bpm.BPMData("bpm03")
             self.BPM4 = ds_bpm.BPMData("bpm04")
+            self.CCD1 = ds_bpm.BPMData("ccd01")
+            self.CCD2 = ds_bpm.BPMData("ccd02")
+            self.CCD3 = ds_bpm.BPMData("ccd03")
+            self.CCD4 = ds_bpm.BPMData("ccd04")
         elif bpm_name == 'model':
             print('model')
             self.BPM1 = ds_model.BPMData("model01")
             self.BPM2 = ds_model.BPMData("model02")
             self.BPM3 = ds_model.BPMData("model03")
             self.BPM4 = ds_model.BPMData("model04")
+            self.CCD1 = ds_model.BPMData("model05")
+            self.CCD2 = ds_model.BPMData("model06")
+            self.CCD3 = ds_model.BPMData("model07")
+            self.CCD4 = ds_model.BPMData("model08")
         else:
             self.BPM1 = ds_model.BPMData("model01")
             self.BPM2 = ds_model.BPMData("model02")
             self.BPM3 = ds_model.BPMData("model03")
             self.BPM4 = ds_model.BPMData("model04")
+            self.CCD1 = ds_model.BPMData("model05")
+            self.CCD2 = ds_model.BPMData("model06")
+            self.CCD3 = ds_model.BPMData("model07")
+            self.CCD4 = ds_model.BPMData("model08")
 
         self.BPM1.data_ready.connect(self.on_data_ready)
         self.BPM2.data_ready.connect(self.on_data_ready)
         self.BPM3.data_ready.connect(self.on_data_ready)
         self.BPM4.data_ready.connect(self.on_data_ready)
+        self.CCD1.data_ready.connect(self.on_data_ready)
+        self.CCD2.data_ready.connect(self.on_data_ready)
+        self.CCD3.data_ready.connect(self.on_data_ready)
+        self.CCD4.data_ready.connect(self.on_data_ready)
 
     def on_data_ready(self, BPM):
         """   """

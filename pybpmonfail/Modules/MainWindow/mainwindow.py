@@ -30,12 +30,28 @@ class MainWindow(QMainWindow):
         self.bpm04_dict = {'BPM_label': self.ui.statusWidget_4.BPM_label, 'time_label': self.ui.statusWidget_4.time_label,
                            'status': self.ui.statusWidget_4.status, 'name': 'BPM<sub>04</sub>',
                            'sound_checkbox': self.ui.statusWidget_4.sound_checkBox}
+        self.ccd01_dict = {'BPM_label': self.ui.statusWidget_5.BPM_label, 'time_label': self.ui.statusWidget_5.time_label,
+                           'status': self.ui.statusWidget_5.status, 'name': 'CCD<sub>01</sub>',
+                           'sound_checkbox': self.ui.statusWidget_5.sound_checkBox}
+        self.ccd02_dict = {'BPM_label': self.ui.statusWidget_6.BPM_label, 'time_label': self.ui.statusWidget_6.time_label,
+                           'status': self.ui.statusWidget_6.status, 'name': 'CCD<sub>02</sub>',
+                           'sound_checkbox': self.ui.statusWidget_6.sound_checkBox}
+        self.ccd03_dict = {'BPM_label': self.ui.statusWidget_7.BPM_label, 'time_label': self.ui.statusWidget_7.time_label,
+                           'status': self.ui.statusWidget_7.status, 'name': 'CCD<sub>03</sub>',
+                           'sound_checkbox': self.ui.statusWidget_7.sound_checkBox}
+        self.ccd04_dict = {'BPM_label': self.ui.statusWidget_8.BPM_label, 'time_label': self.ui.statusWidget_8.time_label,
+                           'status': self.ui.statusWidget_8.status, 'name': 'CCD<sub>04</sub>',
+                           'sound_checkbox': self.ui.statusWidget_8.sound_checkBox}
 
         self.settingsControl = settings_control
         self.watcher_1 = args[0]
         self.watcher_2 = args[1]
         self.watcher_3 = args[2]
         self.watcher_4 = args[3]
+        self.watcher_5 = args[4]
+        self.watcher_6 = args[5]
+        self.watcher_7 = args[6]
+        self.watcher_8 = args[7]
 
         self.widgets_customization()
 
@@ -43,6 +59,10 @@ class MainWindow(QMainWindow):
         self.statusWidget_2.set_bpm(self.watcher_2.get_bpm_name())
         self.statusWidget_3.set_bpm(self.watcher_3.get_bpm_name())
         self.statusWidget_4.set_bpm(self.watcher_4.get_bpm_name())
+        self.statusWidget_5.set_bpm(self.watcher_5.get_bpm_name())
+        self.statusWidget_6.set_bpm(self.watcher_6.get_bpm_name())
+        self.statusWidget_7.set_bpm(self.watcher_7.get_bpm_name())
+        self.statusWidget_8.set_bpm(self.watcher_8.get_bpm_name())
 
         self.statusWidget_1.period_changed.connect(self.on_perion_changed)
         self.statusWidget_1.sound_changed.connect(self.on_sound_changed)
@@ -52,6 +72,14 @@ class MainWindow(QMainWindow):
         self.statusWidget_3.sound_changed.connect(self.on_sound_changed)
         self.statusWidget_4.period_changed.connect(self.on_perion_changed)
         self.statusWidget_4.sound_changed.connect(self.on_sound_changed)
+        self.statusWidget_5.period_changed.connect(self.on_perion_changed)
+        self.statusWidget_5.sound_changed.connect(self.on_sound_changed)
+        self.statusWidget_6.period_changed.connect(self.on_perion_changed)
+        self.statusWidget_6.sound_changed.connect(self.on_sound_changed)
+        self.statusWidget_7.period_changed.connect(self.on_perion_changed)
+        self.statusWidget_7.sound_changed.connect(self.on_sound_changed)
+        self.statusWidget_8.period_changed.connect(self.on_perion_changed)
+        self.statusWidget_8.sound_changed.connect(self.on_sound_changed)
 
         self.actionSave.triggered.connect(self.on_save_button)
         self.actionRead.triggered.connect(self.on_read_button)
@@ -80,6 +108,10 @@ class MainWindow(QMainWindow):
         self.curr_widget_customization(self.bpm02_dict, self.watcher_2.get_start_type())
         self.curr_widget_customization(self.bpm03_dict, self.watcher_3.get_start_type())
         self.curr_widget_customization(self.bpm04_dict, self.watcher_4.get_start_type())
+        self.curr_widget_customization(self.ccd01_dict, self.watcher_5.get_start_type())
+        self.curr_widget_customization(self.ccd02_dict, self.watcher_6.get_start_type())
+        self.curr_widget_customization(self.ccd03_dict, self.watcher_7.get_start_type())
+        self.curr_widget_customization(self.ccd04_dict, self.watcher_8.get_start_type())
 
     def curr_widget_customization(self, w_dict, start_type):
         """   """
@@ -99,6 +131,14 @@ class MainWindow(QMainWindow):
             self.on_widget_status_changed(self.bpm03_dict, watcher.get_last_time(), status, watcher.get_start_type())
         elif watcher.bpm_name in ('model04', 'bpm04'):
             self.on_widget_status_changed(self.bpm04_dict, watcher.get_last_time(), status, watcher.get_start_type())
+        elif watcher.bpm_name in ('model05', 'ccd01'):
+            self.on_widget_status_changed(self.ccd01_dict, watcher.get_last_time(), status, watcher.get_start_type())
+        elif watcher.bpm_name in ('model06', 'ccd02'):
+            self.on_widget_status_changed(self.ccd02_dict, watcher.get_last_time(), status, watcher.get_start_type())
+        elif watcher.bpm_name in ('model07', 'ccd03'):
+            self.on_widget_status_changed(self.ccd03_dict, watcher.get_last_time(), status, watcher.get_start_type())
+        elif watcher.bpm_name in ('model08', 'ccd04'):
+            self.on_widget_status_changed(self.ccd04_dict, watcher.get_last_time(), status, watcher.get_start_type())
         else: pass
 
     def on_widget_status_changed(self, w_dict, time, status, istart):
